@@ -152,5 +152,49 @@
             //Assert
             $this->assertEquals($test_copy, $result);
         }
+
+        function testUpdate()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $new_due_date = "2016-04-01";
+            $new_status = 0;
+
+            //Act
+            $test_copy->update($new_due_date, $new_status);
+            $result = [$test_copy->getDueDate(), $test_copy->getStatus()];
+
+
+            //Assert
+            $this->assertEquals(["2016-04-01", 0], $result);
+        }
+
+        function testDelete()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $due_date2 = "2016-05-01";
+            $status = 1;
+            $book_id2 = 2;
+            $test_copy2 = new Copy($id = null, $book_id2, $due_date2, $status);
+            $test_copy2->save();
+
+            // Act
+            $test_copy->delete();
+            $result = Copy::getAll();
+
+            // Assert
+            $this->assertEquals([$test_copy2], $result);
+        }
     }
 ?>

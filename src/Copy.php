@@ -88,5 +88,17 @@
             return $found_copy;
         }
 
+        function update($new_due_date, $new_status)
+        {
+            $GLOBALS['DB']->exec("UPDATE copies SET due_date = '{$new_due_date}', status = {$new_status} WHERE id = {$this->getId()};");
+            $this->setDueDate($new_due_date);
+            $this->setStatus($new_status);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()};");
+        }
+
     }
 ?>
