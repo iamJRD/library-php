@@ -47,6 +47,32 @@
             return $books;
         }
 
+        static function find($search_id)
+        {
+            $found_book = null;
+            $books = Book::getAll();
+            foreach($books as $book)
+            {
+                $book_id = $book->getId();
+                if ($book_id == $search_id)
+                {
+                    $found_book = $book;
+                }
+            }
+            return $found_book;
+        }
+
+        function update($new_title)
+        {
+            $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
+            $this->setTitle($new_title);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
+        }
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM books");

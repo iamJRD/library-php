@@ -94,6 +94,55 @@
             //Assert
             $this->assertEquals([], $result);
         }
+
+        function testFind()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            //Act
+            $result = Book::find($test_book->getId());
+
+            //Assert
+            $this->assertEquals($test_book, $result);
+        }
+
+        function testDelete()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $title2 = "Moby Dick";
+            $test_book2 = new Book($id = null, $title2);
+            $test_book2->save();
+
+            //Act
+            $test_book->delete();
+            $result = Book::getAll();
+
+            //Assert
+            $this->assertEquals([$test_book2], $result);
+        }
+
+        function testUpdate()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $new_title = "Choke";
+
+            //Act
+            $test_book->update($new_title);
+
+            //Assert
+            $this->assertEquals($new_title, $test_book->getTitle());
+        }
     }
 
 ?>
