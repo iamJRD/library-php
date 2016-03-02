@@ -5,6 +5,8 @@
 
     $app = new Silex\Application();
 
+    $app['debug'] = true;
+
     $server = 'mysql:host=localhost;dbname=library';
     $username = 'root';
     $password = 'root';
@@ -31,6 +33,11 @@
         $new_author = new Author($id = null, $first_name, $last_name);
         $new_author->save();
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
+    });
+
+    $app->get('/author/{id}', function($id) use ($app) {
+        $author = Author::find($id);
+        return $app['twig']->render('author.html.twig', array('author' => $author));
     });
 
     return $app;
