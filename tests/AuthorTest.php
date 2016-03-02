@@ -158,5 +158,24 @@
             $this->assertEquals([$test_author2], $result);
         }
 
+        function testUpdate()
+        {
+            //Arrange
+            $first_name = "John";
+            $last_name = "Poe";
+            $id = null;
+            $test_author = new Author($id, $first_name, $last_name);
+            $test_author->save();
+
+            $new_first_name = "Jonathan";
+            $new_last_name = "Doe";
+
+            // Act
+            $test_author->update($new_first_name, $new_last_name);
+
+            // Assert
+            $this->assertEquals(["Jonathan", "Doe"], [$test_author->getFirstName(), $test_author->getLastName()]);
+        }
+
     }
 ?>
