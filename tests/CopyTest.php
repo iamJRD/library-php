@@ -13,10 +13,10 @@
 
     class CopyTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //   Copy::deleteAll();
-        // }
+        protected function tearDown()
+        {
+          Copy::deleteAll();
+        }
 
         function testGetDueDate()
         {
@@ -74,6 +74,67 @@
 
             //Assert
             $this->assertEquals($book_id, $result);
+        }
+
+        function testSave()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+
+            // Act
+            $test_copy->save();
+            $result = Copy::getAll();
+
+            // Assert
+            $this->assertEquals($test_copy, $result[0]);
+        }
+
+        function testGetAll()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $due_date2 = "2016-05-01";
+            $status = 1;
+            $book_id2 = 2;
+            $test_copy2 = new Copy($id = null, $book_id2, $due_date2, $status);
+            $test_copy2->save();
+
+            // Act
+            $result = Copy::getAll();
+
+            // Assert
+            $this->assertEquals([$test_copy, $test_copy2], $result);
+        }
+
+        function testDeleteAll()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $due_date2 = "2016-05-01";
+            $status = 1;
+            $book_id2 = 2;
+            $test_copy2 = new Copy($id = null, $book_id2, $due_date2, $status);
+            $test_copy2->save();
+
+            // Act
+            Copy::deleteAll();
+            $result = Copy::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
         }
     }
 ?>
