@@ -177,5 +177,51 @@
             $this->assertEquals(["Jonathan", "Doe"], [$test_author->getFirstName(), $test_author->getLastName()]);
         }
 
+        function testAddBook()
+        {
+            // Arrange
+            $first_name = "Chuck";
+            $last_name = "Palahniuk";
+            $id = null;
+            $test_author = new Author($id, $first_name, $last_name);
+            $test_author->save();
+
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            // Act
+            $test_author->addBook($test_book);
+
+            // Arrange
+            $this->assertEquals([$test_book], $test_author->getBooks());
+        }
+
+        function testGetBooks()
+        {
+            // Arrange
+            $first_name = "Chuck";
+            $last_name = "Palahniuk";
+            $id = null;
+            $test_author = new Author($id, $first_name, $last_name);
+            $test_author->save();
+
+            $title = "Fight Club";
+            $test_book = new Book($id, $title);
+            $test_book->save();
+
+            $title2 = "Choke";
+            $test_book2 = new Book($id, $title2);
+            $test_book2->save();
+
+            // Act
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
+            $result = $test_author->getBooks();
+
+            // Assert
+            $this->assertEquals([$test_book, $test_book2], $result);
+        }
+
     }
 ?>

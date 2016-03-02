@@ -92,5 +92,25 @@
             $this->setLastName($new_last_name);
         }
 
+        function addBook($book)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getId()});");
+        }
+
+        function getBooks()
+        {
+            $returned_books = $GLOBALS['DB']->query("SELECT books.* FROM authors JOIN authors_books ON (authors.id = authors_books.author_id) JOIN books ON (authors_books.book_id = books.id) WHERE authors.id = {$this->getId()};");
+            $books = array();
+
+            foreach($returned_books as $book)
+            {
+                $id = $book['id'];
+                $title = $book['title'];
+                $new_book = new Book($id, $title);
+                array_push($books, $new_book);
+            }
+            return $books;
+        }
+
     }
 ?>
