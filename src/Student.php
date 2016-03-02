@@ -99,6 +99,7 @@
             }
             return $courses;
         }
+        
         function addCourse($course)
         {
             $GLOBALS['DB']->exec("INSERT INTO students_courses (course_id, student_id) VALUES ({$course->getId()}, {$this->getId()});");
