@@ -196,5 +196,59 @@
             // Assert
             $this->assertEquals([$test_copy2], $result);
         }
+
+        function testAddPatron()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $first_name = "John";
+            $last_name = "Doe";
+            $phone_number = 9719990101;
+            $test_patron = new Patron($id = null, $first_name, $last_name, $phone_number);
+            $test_patron->save();
+
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = $test_book->getId();
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            //Act
+            $test_copy->addPatron($test_patron);
+            $result = $test_copy->getPatrons();
+
+            //Assert
+            $this->assertEquals([$test_patron], $result);
+        }
+
+        function testGetPatrons()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = $test_book->getId();
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $first_name = "John";
+            $last_name = "Doe";
+            $phone_number = 9719990101;
+            $test_patron = new Patron($id = null, $first_name, $last_name, $phone_number);
+            $test_patron->save();
+
+            // Act
+            $test_copy->addPatron($test_patron);
+            $result = $test_copy->getPatrons();
+
+            // Assert
+            $this->assertEquals([$test_patron], $result);
+        }
     }
 ?>

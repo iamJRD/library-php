@@ -100,5 +100,27 @@
             $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$this->getId()};");
         }
 
+        function addPatron($patron)
+        {
+            $GLOBALS['DB']->exec("INSERT INTO copies_patrons (patron_id, copy_id) VALUES ({$patron->getId()}, {$this->getId()});");
+        }
+
+        function getPatrons()
+        {
+            $returned_patrons = $GLOBALS['DB']->query("SELECT patrons.* FROM copies JOIN copies_patrons ON (copies.id = copies_patrons.copy_id) JOIN patrons ON (copies_patrons.patron_id = patrons.id) WHERE copies.id = {$this->getId()};");
+            $patrons = array();
+
+            foreach($returned_patrons as $patron)
+            {
+                $id = $patron['id'];
+                $first_name = $patron['first_name'];
+                $last_name = $patron['last_name'];
+                $phone_number = $patron['phone_number'];
+                $new_patron = new Patron($id, $first_name, $last_name, $phone_number);
+                array_push($patrons, $new_patron);
+            }
+            return $patrons;
+        }
+
     }
 ?>
