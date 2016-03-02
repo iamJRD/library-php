@@ -72,5 +72,21 @@
             $GLOBALS['DB']->exec("DELETE FROM copies");
         }
 
+        static function find($search_id)
+        {
+            $found_copy = null;
+            $returned_copies = Copy::getAll();
+
+            foreach($returned_copies as $copy)
+            {
+                $copy_id = $copy->getId();
+                if ($copy_id == $search_id)
+                {
+                    $found_copy = $copy;
+                }
+            }
+            return $found_copy;
+        }
+
     }
 ?>

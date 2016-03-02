@@ -136,5 +136,21 @@
             // Assert
             $this->assertEquals([], $result);
         }
+
+        function testFind()
+        {
+            // Arrange
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = 1;
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            //Act
+            $result = Copy::find($test_copy->getId());
+
+            //Assert
+            $this->assertEquals($test_copy, $result);
+        }
     }
 ?>
