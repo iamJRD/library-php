@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ .'/../vendor/autoload.php';
     require_once __DIR__.'/../src/Author.php';
-    require_once __DIR__.'/../src/???.php';
+    require_once __DIR__.'/../src/Book.php';
 
     $app = new Silex\Application();
 
