@@ -17,5 +17,21 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+    $app->get('/', function() use ($app){
+        return $app['twig']->render('index.html.twig');
+    });
+
+    $app->get('/library', function() use ($app) {
+        return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
+    });
+
+    $app->post('/add_author', function() use ($app) {
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $new_author = new Author($id = null, $first_name, $last_name);
+        $new_author->save();
+        return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
+    });
+
     return $app;
 ?>

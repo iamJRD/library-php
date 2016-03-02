@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'header.html' %}
+    </head>
+    <body>
+        <h1>Welcome to the Library Database System!</h1>
+        {% if authors is not empty %}
+            <h3>Here is your list of authors:</h3>
+            <ul>
+                {% for author in authors %}
+                    <li><a href="/author/{{ author.getId }}">{{ author.getFirstName }} {{ author.getLastName }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>You currently don't have any authors in your database. Use the form below to start adding authors.</h3>
+        {% endif %}
+
+        <form action="/add_author" method="post">
+            <label for="first_name">Author's First Name:</label>
+            <input type="text" name="first_name" required>
+
+            <label for="last_name">Author's Last Name:</label>
+            <input type="text" name="last_name" required>
+
+            <button type="submit" class="btn btn-info">Add Author to Database</button>
+        </form>
+    </body>
+</html>

@@ -184,6 +184,21 @@
             //Assert
             $this->assertEquals([$test_author], $result);
         }
+
+        // function testAddCopy()
+        // {
+        //     //Arrange
+        //     $title = "Fight Club";
+        //     $test_book = new Book($id = null, $title);
+        //     $test_book->save();
+        //
+        //     $
+        // }
+        //
+        // function testGetCopies()
+        // {
+        //
+        // }
     }
 
 ?>
