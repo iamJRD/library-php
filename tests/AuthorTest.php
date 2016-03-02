@@ -24,7 +24,7 @@
             //Arrange
             $first_name = "John";
             $last_name = "Doe";
-            $test_author = new Author($first_name, $last_name);
+            $test_author = new Author($id = null, $first_name, $last_name);
 
             //Act
             $result = $test_author->getFirstName();
