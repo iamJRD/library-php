@@ -98,5 +98,22 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM books");
         }
+
+        function getCopies()
+        {
+            $returned_copies = $GLOBALS['DB']->query("SELECT * FROM copies WHERE book_id = {$this->getId()};");
+            $copies = array();
+
+            foreach($returned_copies as $copy)
+            {
+                $id = $copy['id'];
+                $book_id = $copy['book_id'];
+                $due_date = $copy['due_date'];
+                $status = $copy['status'];
+                $new_copy = new Copy($id, $book_id, $due_date, $status);
+                array_push($copies, $new_copy);
+            }
+            return $copies;
+        }
     }
 ?>

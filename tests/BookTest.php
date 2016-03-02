@@ -185,20 +185,31 @@
             $this->assertEquals([$test_author], $result);
         }
 
-        // function testAddCopy()
-        // {
-        //     //Arrange
-        //     $title = "Fight Club";
-        //     $test_book = new Book($id = null, $title);
-        //     $test_book->save();
-        //
-        //     $
-        // }
-        //
-        // function testGetCopies()
-        // {
-        //
-        // }
+        function testGetCopies()
+        {
+            //Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = $test_book->getId();
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $due_date2 = "2016-05-01";
+            $status = 1;
+            $book_id2 = 5;
+            $test_copy2 = new Copy($id = null, $book_id2, $due_date2, $status);
+            $test_copy2->save();
+
+            // Act
+            $result = $test_book->getCopies();
+
+            // Assert
+            $this->assertEquals([$test_copy], $result);
+        }
     }
 
 ?>
