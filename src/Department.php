@@ -67,7 +67,6 @@
         {
             $returned_courses = $GLOBALS['DB']->query("SELECT courses.* FROM departments JOIN departments_courses ON (departments.id = departments_courses.department_id) JOIN courses ON (departments_courses.course_id = courses.id) WHERE department_id = {$this->getId()};");
 
-
             $courses = array();
             foreach($returned_courses as $course) {
                 $name = $course['name'];
@@ -78,6 +77,7 @@
             }
             return $courses;
         }
+
         function addCourse($course)
         {
             $GLOBALS['DB']->exec("INSERT INTO departments_courses (course_id, department_id) VALUES ({$course->getId()}, {$this->getId()});");
@@ -95,5 +95,4 @@
             $this->setName($new_name);
         }
     }
-
 ?>

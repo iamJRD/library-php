@@ -1,5 +1,4 @@
 <?php
-
     /**
     * @backupGlobals disabled
     * @backupStaticAttributes disabled
@@ -7,7 +6,7 @@
 
     require_once "src/Department.php";
 
-    $server = 'mysql:host=localhost;dbname=university_test';
+    $server = 'mysql:host=localhost:8889;dbname=university_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -18,7 +17,6 @@
         protected function tearDown()
         {
           Department::deleteAll();
-
         }
 
 
@@ -199,5 +197,4 @@
             $this->assertEquals($new_name, $result);
         }
     }
-
 ?>

@@ -62,6 +62,7 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM courses;");
         }
+
         static function find($search_id)
         {
             $found_course = null;
@@ -74,6 +75,7 @@
             }
             return $found_course;
         }
+
         public function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
@@ -106,6 +108,5 @@
             }
             return $students;
         }
-
     }
 ?>

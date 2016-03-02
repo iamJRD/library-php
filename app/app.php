@@ -115,9 +115,5 @@
         return $app['twig']->render("courses.html.twig", array('courses' => Course::getAll()));
     });
 
-
-
-
-
     return $app;
 ?>

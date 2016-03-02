@@ -13,30 +13,37 @@
             $this->id = $id;
             $this->department_id = $department_id;
         }
+
         function setName($new_name)
         {
             $this->name = $new_name;
         }
+
         function getName()
         {
             return $this->name;
         }
+
         function setEnrollment($new_enrollment)
         {
             $this->enrollment = $new_enrollment;
         }
+
         function getEnrollment()
         {
             return $this->enrollment;
         }
+
         function getId()
         {
             return $this->id;
         }
+
         function getDepartmentId()
         {
             return $this->department_id;
         }
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO students (name, enrollment) VALUES ('{$this->getName()}','{$this->getEnrollment()}')");
@@ -101,6 +108,7 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO students (department_id) VALUES ({$department->getId()});");
         }
+
         public function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM students WHERE id = {$this->getId()};");
@@ -113,7 +121,5 @@
             $this->setName($new_name);
             $this->setEnrollment($new_enrollment);
         }
-
-
     }
 ?>

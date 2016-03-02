@@ -15,7 +15,7 @@
                 {% endfor %}
             </ul>
         {% endif %}
-<!-- ADD TASK TO CATEGORY DROPDOWN -->
+<!-- ADD THIS STUDENT TO A COURSE DROPDOWN -->
         <form action="/student_add_course" method="post">
             <input id="student_id" = name="student_id" type="hidden" value="{{ student.getId }}">
                 <label for="course_id">Add this student to a course:</label>
@@ -26,7 +26,7 @@
                 </select>
             <button type="submit">Add Course</button>
         </form>
-<!-- EDIT TASK FORM -->
+<!-- EDIT THIS STUDENT FORM -->
         <h5>Edit your student here:</h5>
         <form action="/student/{{ student.getId }}/update" method="post">
             <input type="hidden" name="_method" value="patch">
@@ -39,7 +39,7 @@
 
             <button type='submit'>Update Student</button>
         </form>
-<!-- DELETE TASK BUTTON -->
+<!-- DELETE THIS STUDENT BUTTON -->
         <form action="/student/{{ student.getId }}/delete" method="post">
             <input type="hidden" name="_method" value="delete">
             <button type="submit">Delete this student!</button>
