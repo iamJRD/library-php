@@ -30,6 +30,11 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO books (title) VALUES ('{$this->getTitle()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+
+            $book_id = $this->getId();
+
+            $new_copy = new Copy($id = null, $book_id, $due_date = "1901-01-01", $status = 1);
+            $new_copy->save();
         }
 
         static function getAll()
@@ -114,7 +119,6 @@
             foreach($returned_copies as $copy)
             {
                 $id = $copy['id'];
-                // var_dump($id);
                 $book_id = $copy['book_id'];
                 $due_date = $copy['due_date'];
                 $status = $copy['status'];

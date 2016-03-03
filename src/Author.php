@@ -51,7 +51,7 @@
                 $found_author = Author::find($author_id);
             }
 
-            if (($found_author != null) && ($found_author->getFirstName() == $new_first_name && $found_author->getLastName() == $new_last_name)) {
+            if ($found_author != null) {
                 return $found_author;
             }
             else {
