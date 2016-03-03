@@ -38,10 +38,26 @@
         }
 // IF AUTHOR DOESNT EXIST, RETURN MATCHING AUTHOR
     // ELSE SAVE AUTHOR
-        function save()
+        function save($new_first_name, $new_last_name)
         {
-            $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $query = $GLOBALS['DB']->query("SELECT * FROM authors WHERE first_name = '{$new_first_name}' AND last_name = '{$new_last_name}';");
+            $name_match = $query->fetchAll(PDO::FETCH_ASSOC);
+            $found_author = null;
+
+            foreach ($name_match as $author) {
+                $first_name = $author['first_name'];
+                $last_name = $author['last_name'];
+                $author_id = $author['id'];
+                $found_author = Author::find($author_id);
+            }
+
+            if (($found_author != null) && ($found_author->getFirstName() == $new_first_name && $found_author->getLastName() == $new_last_name)) {
+                return $found_author;
+            }
+            else {
+                $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+            }
         }
 
         static function getAll()

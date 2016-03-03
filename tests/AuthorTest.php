@@ -5,6 +5,7 @@
     */
 
     require_once "src/Author.php";
+    require_once "src/Book.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -17,6 +18,7 @@
         protected function tearDown()
         {
           Author::deleteAll();
+          Book::deleteAll();
         }
 
         function testGetFirstName()
@@ -67,15 +69,25 @@
             //Arrange
             $first_name = "John";
             $last_name = "Poe";
-            $id = 1;
+            $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
+
+            $first_name2 = "Jane";
+            $last_name2 = "Smith";
+            $test_author2 = new Author($id, $first_name2, $last_name2);
+            $test_author2->save($first_name2, $last_name2);
+
+            $first_name3 = "John";
+            $last_name3 = "Poe";
+            $test_author3 = new Author($id, $first_name3, $last_name3);
+            $test_author3->save($first_name3, $last_name3);
 
             //Act
             $result = Author::getAll();
 
             //Assert
-            $this->assertEquals($test_author, $result[0]);
+            $this->assertEquals([$test_author, $test_author2], $result);
         }
 
         function testGetAll()
@@ -85,12 +97,12 @@
             $last_name = "Poe";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $first_name2 = "Jane";
             $last_name2 = "Smith";
             $test_author2 = new Author($id, $first_name2, $last_name2);
-            $test_author2->save();
+            $test_author2->save($first_name2, $last_name2);
 
             // Act
             $result = Author::getAll();
@@ -106,7 +118,7 @@
             $last_name = "Poe";
             $id = 1;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             //Act
             $result = Author::find($test_author->getId());
@@ -122,12 +134,12 @@
             $last_name = "Poe";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $first_name2 = "Jane";
             $last_name2 = "Smith";
             $test_author2 = new Author($id, $first_name2, $last_name2);
-            $test_author2->save();
+            $test_author2->save($first_name2, $last_name2);
 
             // Act
             Author::deleteAll();
@@ -143,12 +155,12 @@
             $last_name = "Poe";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $first_name2 = "Jane";
             $last_name2 = "Smith";
             $test_author2 = new Author($id, $first_name2, $last_name2);
-            $test_author2->save();
+            $test_author2->save($first_name2, $last_name2);
 
             // Act
             $test_author->delete();
@@ -165,7 +177,7 @@
             $last_name = "Poe";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $new_first_name = "Jonathan";
             $new_last_name = "Doe";
@@ -184,7 +196,7 @@
             $last_name = "Palahniuk";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $title = "Fight Club";
             $test_book = new Book($id = null, $title);
@@ -204,7 +216,7 @@
             $last_name = "Palahniuk";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             $title = "Fight Club";
             $test_book = new Book($id, $title);

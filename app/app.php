@@ -40,10 +40,17 @@
         $last_name = $_POST['last_name'];
         $title = $_POST['title'];
         $new_author = new Author($id = null, $first_name, $last_name);
-        $new_author->save();
+        $new_author->save($first_name, $last_name);
+        if ($found_author != null) {
+            $new_book = new Book($id = null, $title);
+            $new_book->save();
+            $found_author->addBook($new_book);
+        }
+        else {
         $new_book = new Book($id = null, $title);
         $new_book->save();
         $new_author->addBook($new_book);
+        }
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
     });
 

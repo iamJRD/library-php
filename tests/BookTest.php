@@ -5,6 +5,7 @@
     */
 
     require_once "src/Book.php";
+    require_once "src/Author.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -16,6 +17,7 @@
         protected function tearDown()
         {
           Book::deleteAll();
+          Author::deleteAll();
         }
 
         function testGetTitle()
@@ -155,7 +157,7 @@
             $last_name = "Palahniuk";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             //Act
             $test_book->addAuthor($test_author);
@@ -175,7 +177,7 @@
             $last_name = "Palahniuk";
             $id = null;
             $test_author = new Author($id, $first_name, $last_name);
-            $test_author->save();
+            $test_author->save($first_name, $last_name);
 
             //Act
             $test_book->addAuthor($test_author);
