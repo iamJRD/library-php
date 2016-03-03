@@ -63,15 +63,39 @@
     $app->get('/book/{id}', function($id) use ($app) {
         $book = Book::find($id);
         $author = $book->getAuthors();
-        $copies = $book->getCopies();
-        var_dump($book->getCopies());
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies[0]));
+        $book_copies = $book->getCopies();
+        var_dump($book_copies);
+        $copies = $book->countCopies($book_copies);
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
     });
 
     $app->post('/delete_all', function() use ($app){
         Author::deleteAll();
         Book::deleteAll();
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
+    });
+
+    $app->patch('/book/{id}/edit', function($id) use ($app) {
+        $book = Book::find($id);
+        $new_title = $_POST['new_title'];
+        $book->update($new_title);
+        $author = $book->getAuthors();
+        $book_copies = $book->getCopies();
+        $copies = $book->countCopies($book_copies);
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
+    });
+
+    $app->patch('/book/{id}/edit_copies', function($id) use ($app) {
+        $book = Book::find($id);
+        $copy = $book->getCopies();
+        $new_number_of_copies = $_POST['new_number_of_copies'];
+        for ($i=0; $i<=$new_number_of_copies; $i++) {
+                $copy[0]->save();
+        }
+        $book_copies = $book->getCopies();
+        $author = $book->getAuthors();
+        $copies = $book->countCopies($book_copies);
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
     });
 
     return $app;

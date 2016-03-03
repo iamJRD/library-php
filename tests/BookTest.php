@@ -188,6 +188,26 @@
             $this->assertEquals([$test_author], $result);
         }
 
+        function testAddCopy()
+        {
+            // Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = 1, $title);
+            $test_book->save();
+
+            $status = 1;
+            $book_id = $test_book->getId();
+            $test_copy = new Copy($id = 2, $book_id, $due_date = null, $status);
+            $test_copy->save();
+
+            // Act
+            $test_book->addCopy($test_copy);
+            $result = $test_book->getCopies();
+var_dump($result);
+            // Assert
+            $this->assertEquals([$test_copy], $result);
+        }
+
         function testGetCopies()
         {
             //Arrange

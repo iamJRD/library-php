@@ -6,12 +6,17 @@
         private $due_date;
         private $status;
 
-        function __construct($id = null, $book_id, $due_date, $status)
+        function __construct($id = null, $book_id, $due_date = null, $status)
         {
             $this->id = $id;
             $this->book_id = $book_id;
             $this->due_date = $due_date;
             $this->status = $status;
+        }
+
+        function setId($new_id)
+        {
+            $this->id = $new_id;
         }
 
         function setDueDate($new_due_date)

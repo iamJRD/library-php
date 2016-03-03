@@ -7,13 +7,13 @@
         <h1>Welcome to the Library Database System!</h1>
             <h3>{{ book.getTitle }}</h3>
             <h4>{{ author.getFirstName }} {{ author.getLastName }}</h4>
-            <h5>Current number of copies: {{ book.getCopies }}</h5>
+            <h5>Current number of copies: {{ copies }}</h5>
 
             <form action="/book/{{ book.getId }}/edit" method="post">
                 <input type="hidden" name="_method" value="patch">
 
                 <label for="new_title">Edit Book Title:</label>
-                <input type="text" name="new_title" value="{{ book.getTitle }}">
+                <input type="text" name="new_title" value="{{ book.getTitle }}" required>
 
                 <button type="submit" class="btn btn-success">Submit Edit</button>
             </form>
@@ -22,7 +22,7 @@
                 <input type="hidden" name="_method" value="patch">
 
                 <label for="new_number_of_copies">Edit the number of copies owned for this book:</label>
-                <input type="number" name="new_number_of_copies" value="">
+                <input type="number" name="new_number_of_copies" min=0 value="{{ copies }}" required>
 
                 <button type="submit" class="btn btn-primary">Submit Copies</button>
             </form>
