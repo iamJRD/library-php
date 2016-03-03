@@ -19,7 +19,10 @@
 
         protected function tearDown()
         {
-          Patron::deleteAll();
+            Book::deleteAll();
+            Author::deleteAll();
+            Copy::deleteAll();
+            Patron::deleteAll();
         }
 
         function testGetFirstName()

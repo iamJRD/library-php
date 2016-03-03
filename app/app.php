@@ -48,9 +48,9 @@
             $found_author->addBook($new_book);
         }
         else {
-        $new_book = new Book($id = null, $title);
-        $new_book->save();
-        $new_author->addBook($new_book);
+            $new_book = new Book($id = null, $title);
+            $new_book->save();
+            $new_author->addBook($new_book);
         }
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
     });

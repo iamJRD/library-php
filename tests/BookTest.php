@@ -7,6 +7,7 @@
     require_once "src/Book.php";
     require_once "src/Author.php";
     require_once "src/Copy.php";
+    require_once "src/Patron.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -17,8 +18,10 @@
     {
         protected function tearDown()
         {
-          Book::deleteAll();
-          Author::deleteAll();
+            Book::deleteAll();
+            Author::deleteAll();
+            Copy::deleteAll();
+            Patron::deleteAll();
         }
 
         function testGetTitle()
@@ -192,18 +195,18 @@
         {
             // Arrange
             $title = "Fight Club";
-            $test_book = new Book($id = 1, $title);
+            $test_book = new Book($id = null, $title);
             $test_book->save();
 
             $status = 1;
             $book_id = $test_book->getId();
-            $test_copy = new Copy($id = 2, $book_id, $due_date = null, $status);
-            $test_copy->save();
+            $due_date = "2016-03-03";
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
 
             // Act
             $test_book->addCopy($test_copy);
             $result = $test_book->getCopies();
-var_dump($result);
+
             // Assert
             $this->assertEquals([$test_copy], $result);
         }

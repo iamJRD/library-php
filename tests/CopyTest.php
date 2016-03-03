@@ -17,7 +17,10 @@
     {
         protected function tearDown()
         {
-          Copy::deleteAll();
+            Book::deleteAll();
+            Author::deleteAll();
+            Copy::deleteAll();
+            Patron::deleteAll();
         }
 
         function testGetDueDate()

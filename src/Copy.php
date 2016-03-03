@@ -6,7 +6,7 @@
         private $due_date;
         private $status;
 
-        function __construct($id = null, $book_id, $due_date = null, $status)
+        function __construct($id = null, $book_id, $due_date, $status)
         {
             $this->id = $id;
             $this->book_id = $book_id;

@@ -4,48 +4,48 @@
         {% include 'header.html' %}
     </head>
     <body>
-        <h1>Welcome to the Library Database System!</h1>
-        {% if authors is not empty %}
-            <h3>Here is your list of authors:</h3>
-            <ul>
-                {% for author in authors %}
-                    <li><a href="/author/{{ author.getId }}">{{ author.getFirstName }} {{ author.getLastName }}</a></li>
-                        <ul>
-                            {% for book in author.getBooks %}
-                                <li><a href="/book/{{ book.getId }}">{{ book.getTitle }}</a></li>
-                            {% endfor %}
-                        </ul>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h3>You currently don't have any authors in your database. Use the form below to start adding authors.</h3>
-        {% endif %}
+        <div class="container">
+            <h1>Welcome to the Library Database System!</h1>
+            {% if authors is not empty %}
+                <h3>Here is your list of authors:</h3>
+                <ul>
+                    {% for author in authors %}
+                        <li><a href="/author/{{ author.getId }}">{{ author.getFirstName }} {{ author.getLastName }}</a></li>
+                            <ul>
+                                {% for book in author.getBooks %}
+                                    <li><a href="/book/{{ book.getId }}">{{ book.getTitle }}</a></li>
+                                {% endfor %}
+                            </ul>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h3>You currently don't have any authors in your database. Use the form below to start adding authors.</h3>
+            {% endif %}
 
-        <form action="/add_author_book" method="post">
-            <div class="form-group">
-                <label for="title">Book Title:</label>
-                <input type="text" name="title" required>
-            </div>
+            <form action="/add_author_book" method="post">
+                <div class="form-group">
+                    <label for="title">Book Title:</label>
+                    <input type="text" name="title" required>
+                </div>
 
-            <div class="form-group">
-                <label for="first_name">Author's First Name:</label>
-                <input type="text" name="first_name" required>
-            </div>
+                <div class="form-group">
+                    <label for="first_name">Author's First Name:</label>
+                    <input type="text" name="first_name" required>
+                </div>
 
-            <div class="form-group">
-                <label for="last_name">Author's Last Name:</label>
-                <input type="text" name="last_name" required>
-            </div>
+                <div class="form-group">
+                    <label for="last_name">Author's Last Name:</label>
+                    <input type="text" name="last_name" required>
+                </div>
 
-            <button type="submit" class="btn btn-info">Add Book to Database</button>
-        </form>
+                <button type="submit" class="btn btn-info">Add Book to Database</button>
+            </form>
 
-        <form action="/delete_all" method="post">
-            <button class="btn btn-danger" type="submit">DELETE ALL</button>
-        </form>
+            <form action="/delete_all" method="post">
+                <button class="btn btn-danger" type="submit">DELETE ALL</button>
+            </form>
 
-        {% include 'footer.html' %}
-
-
+            {% include 'footer.html' %}
+        </div>
     </body>
 </html>

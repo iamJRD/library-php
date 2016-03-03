@@ -4,28 +4,32 @@
         {% include 'header.html' %}
     </head>
     <body>
-        <h1>Welcome to the Library Database System!</h1>
-            <h3>{{ book.getTitle }}</h3>
-            <h4>{{ author.getFirstName }} {{ author.getLastName }}</h4>
-            <h5>Current number of copies: {{ copies }}</h5>
+        <div class="container">
+            <h1>Welcome to the Library Database System!</h1>
+                <h3>{{ book.getTitle }}</h3>
+                <h4>{{ author.getFirstName }} {{ author.getLastName }}</h4>
+                <h5>Current number of copies: {{ copies }}</h5>
 
-            <form action="/book/{{ book.getId }}/edit" method="post">
-                <input type="hidden" name="_method" value="patch">
+                <form action="/book/{{ book.getId }}/edit" method="post">
+                    <input type="hidden" name="_method" value="patch">
 
-                <label for="new_title">Edit Book Title:</label>
-                <input type="text" name="new_title" value="{{ book.getTitle }}" required>
+                    <label for="new_title">Edit Book Title:</label>
+                    <input type="text" name="new_title" value="{{ book.getTitle }}" required>
 
-                <button type="submit" class="btn btn-success">Submit Edit</button>
-            </form>
+                    <button type="submit" class="btn btn-success">Submit Edit</button>
+                </form>
 
-            <form action="/book/{{ book.getId }}/edit_copies" method="post">
-                <input type="hidden" name="_method" value="patch">
+                <form action="/book/{{ book.getId }}/edit_copies" method="post">
+                    <input type="hidden" name="_method" value="patch">
 
-                <label for="new_number_of_copies">Edit the number of copies owned for this book:</label>
-                <input type="number" name="new_number_of_copies" min=0 value="{{ copies }}" required>
+                    <label for="copies_amount_edit">Edit the number of copies owned for this book:</label>
+                    <option>
+                        
+                    </option>
 
-                <button type="submit" class="btn btn-primary">Submit Copies</button>
-            </form>
-        {% include 'footer.html' %}
+                    <button type="submit" class="btn btn-primary">Submit Copies</button>
+                </form>
+            {% include 'footer.html' %}
+        </div>
     </body>
 </html>
