@@ -16,14 +16,23 @@
             <h3>You currently don't have any authors in your database. Use the form below to start adding authors.</h3>
         {% endif %}
 
-        <form action="/add_author" method="post">
-            <label for="first_name">Author's First Name:</label>
-            <input type="text" name="first_name" required>
+        <form action="/add_author_book" method="post">
+            <div class="form-group">
+                <label for="title">Book Title:</label>
+                <input type="text" name="title" required>
+            </div>
 
-            <label for="last_name">Author's Last Name:</label>
-            <input type="text" name="last_name" required>
+            <div class="form-group">
+                <label for="first_name">Author's First Name:</label>
+                <input type="text" name="first_name" required>
+            </div>
 
-            <button type="submit" class="btn btn-info">Add Author to Database</button>
+            <div class="form-group">
+                <label for="last_name">Author's Last Name:</label>
+                <input type="text" name="last_name" required>
+            </div>
+            
+            <button type="submit" class="btn btn-info">Add Book to Database</button>
         </form>
     </body>
 </html>

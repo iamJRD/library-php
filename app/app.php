@@ -27,11 +27,15 @@
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
     });
 
-    $app->post('/add_author', function() use ($app) {
+    $app->post('/add_author_book', function() use ($app) {
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
+        $title = $_POST['title'];
         $new_author = new Author($id = null, $first_name, $last_name);
         $new_author->save();
+        $new_author->addBook();
+        $new_book = new Book($id = null, $title);
+        $test_book->save();
         return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
     });
 
