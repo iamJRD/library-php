@@ -89,7 +89,6 @@
         $book = Book::find($id);
         $book_id = $book->getId();
         $copy = $book->getCopies();
-        var_dump($copy);
 
         if($number_of_copies > 0) {
             for ($i=0; $i<$number_of_copies; $i++) {
@@ -103,13 +102,15 @@
                 }
             }
         } else {
-            for ($i=0; $i>=$number_of_copies; $i--) {
+            $pos_num = abs($number_of_copies);
+            for ($i=0; $i<$pos_num; $i++) {
                 $book->deleteCopies($copy[0]);
+                array_shift($copy);
             }
         }
-        $book_copies = $book->getCopies();
+        $copy = $book->getCopies();
         $author = $book->getAuthors();
-        $copies = $book->countCopies($book_copies);
+        $copies = $book->countCopies($copy);
         return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
     });
 
