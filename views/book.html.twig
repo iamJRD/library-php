@@ -23,11 +23,22 @@
                     <input type="hidden" name="_method" value="patch">
 
                     <label for="copies_amount_edit">Edit the number of copies owned for this book:</label>
-                    <option>
-                        
-                    </option>
-
-                    <button type="submit" class="btn btn-primary">Submit Copies</button>
+                    <select name="number_of_copies">
+                        <option name="number_of_copies" value="-5">-5</option>
+                        <option name="number_of_copies" value="-4">-4</option>
+                        <option name="number_of_copies" value="-3">-3</option>
+                        <option name="number_of_copies" value="-2">-2</option>
+                        <option name="number_of_copies" value="-1">-1</option>
+                        <option name="number_of_copies" value="0" selected>0</option>
+                        <option name="number_of_copies" value="1">1</option>
+                        <option name="number_of_copies" value="2">2</option>
+                        <option name="number_of_copies" value="3">3</option>
+                        <option name="number_of_copies" value="4">4</option>
+                        <option name="number_of_copies" value="5">5</option>
+                    </select>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit Copies</button>
+                    </div>
                 </form>
             {% include 'footer.html' %}
         </div>

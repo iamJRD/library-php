@@ -128,6 +128,12 @@
             return $copies;
         }
 
+        function deleteCopies($copy)
+        {
+            $GLOBALS['DB']->exec("DELETE FROM copies WHERE id = {$copy->getId()};");
+        }
+
+
         function countCopies($new_copies)
         {
             $number_of_copies = count($new_copies);
