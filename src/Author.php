@@ -62,7 +62,7 @@
 
         static function getAll()
         {
-            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors");
+            $returned_authors = $GLOBALS['DB']->query("SELECT * FROM authors ORDER BY last_name");
             $authors = array();
 
             foreach($returned_authors as $author)

@@ -2,6 +2,8 @@
     require_once __DIR__ .'/../vendor/autoload.php';
     require_once __DIR__.'/../src/Author.php';
     require_once __DIR__.'/../src/Book.php';
+    require_once __DIR__.'/../src/Copy.php';
+    require_once __DIR__.'/../src/Patron.php';
 
     $app = new Silex\Application();
 
@@ -33,14 +35,13 @@
         }
         return $app['twig']->render('library.html.twig', array('authors' => $authors, 'book' => $book_by_author));
     });
-// IF AUTHOR EXISTS, IGNORE INPUTS
-    // ELSE, SAVE TO DATABASE
+
     $app->post('/add_author_book', function() use ($app) {
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $title = $_POST['title'];
         $new_author = new Author($id = null, $first_name, $last_name);
-        $new_author->save($first_name, $last_name);
+        $found_author = $new_author->save($first_name, $last_name);
         if ($found_author != null) {
             $new_book = new Book($id = null, $title);
             $new_book->save();
@@ -61,7 +62,16 @@
 
     $app->get('/book/{id}', function($id) use ($app) {
         $book = Book::find($id);
-        return $app['twig']->render('book.html.twig', array('book' => $book));
+        $author = $book->getAuthors();
+        $copies = $book->getCopies();
+        var_dump($book->getCopies());
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies[0]));
+    });
+
+    $app->post('/delete_all', function() use ($app){
+        Author::deleteAll();
+        Book::deleteAll();
+        return $app['twig']->render('library.html.twig', array('authors' => Author::getAll()));
     });
 
     return $app;

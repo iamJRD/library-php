@@ -6,6 +6,7 @@
 
     require_once "src/Book.php";
     require_once "src/Author.php";
+    require_once "src/Copy.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -211,6 +212,31 @@
 
             // Assert
             $this->assertEquals([$test_copy], $result);
+        }
+
+        function testCountCopies()
+        {
+            // Arrange
+            $title = "Fight Club";
+            $test_book = new Book($id = null, $title);
+            $test_book->save();
+
+            $due_date = "2016-03-01";
+            $status = 1;
+            $book_id = $test_book->getId();
+            $test_copy = new Copy($id = null, $book_id, $due_date, $status);
+            $test_copy->save();
+
+            $due_date2 = "2016-05-01";
+            $test_copy2 = new Copy($id = null, $book_id, $due_date2, $status);
+            $test_copy2->save();
+
+            // Act
+            $book_copies = $test_book->getCopies();
+            $result = $test_book->countCopies($book_copies);
+
+            // Assert
+            $this->assertEquals(2, $result);
         }
     }
 ?>

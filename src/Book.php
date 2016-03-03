@@ -115,5 +115,11 @@
             }
             return $copies;
         }
+
+        function countCopies($new_copies)
+        {
+            $number_of_copies = count($new_copies);
+            return $number_of_copies;
+        }
     }
 ?>
