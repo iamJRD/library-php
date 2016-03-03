@@ -36,7 +36,8 @@
         {
             return $this->id;
         }
-
+// IF AUTHOR DOESNT EXIST, RETURN MATCHING AUTHOR
+    // ELSE SAVE AUTHOR
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");

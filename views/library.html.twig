@@ -10,6 +10,11 @@
             <ul>
                 {% for author in authors %}
                     <li><a href="/author/{{ author.getId }}">{{ author.getFirstName }} {{ author.getLastName }}</a></li>
+                        <ul>
+                            {% for book in author.getBooks %}
+                                <li><a href="/book/{{ book.getId }}">{{ book.getTitle }}</a></li>
+                            {% endfor %}
+                        </ul>
                 {% endfor %}
             </ul>
         {% else %}
@@ -31,7 +36,7 @@
                 <label for="last_name">Author's Last Name:</label>
                 <input type="text" name="last_name" required>
             </div>
-            
+
             <button type="submit" class="btn btn-info">Add Book to Database</button>
         </form>
     </body>
