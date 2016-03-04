@@ -102,11 +102,16 @@
                 }
             }
         } else {
+            $copies = $book->countCopies($copy);
             $pos_num = abs($number_of_copies);
-            for ($i=0; $i<$pos_num; $i++) {
-                $book->deleteCopies($copy[0]);
-                array_shift($copy);
-            }
+            if ($pos_num < $copies) {
+                for ($i=0; $i<$pos_num; $i++) {
+                    $book->deleteCopies($copy[0]);
+                    array_shift($copy);
+                }
+            } else {
+               echo "not valid";
+           }
         }
         $copy = $book->getCopies();
         $author = $book->getAuthors();
