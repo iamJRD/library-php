@@ -65,7 +65,8 @@
         $author = $book->getAuthors();
         $book_copies = $book->getCopies();
         $copies = $book->countCopies($book_copies);
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
+        $not_valid = null;
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies, 'error' => $not_valid));
     });
 
     $app->post('/delete_all', function() use ($app){
@@ -81,7 +82,8 @@
         $author = $book->getAuthors();
         $book_copies = $book->getCopies();
         $copies = $book->countCopies($book_copies);
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
+        $not_valid = null;
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies, 'error' => $not_valid));
     });
 
     $app->patch('/book/{id}/edit_copies', function($id) use ($app) {
@@ -89,6 +91,7 @@
         $book = Book::find($id);
         $book_id = $book->getId();
         $copy = $book->getCopies();
+        $not_valid = "test";
 
         if($number_of_copies > 0) {
             for ($i=0; $i<$number_of_copies; $i++) {
@@ -110,13 +113,14 @@
                     array_shift($copy);
                 }
             } else {
-               echo "not valid";
+               $not_valid = "You cannot remove more copies than you own, vanilla-face!";
            }
         }
+        $not_valid = "You cannot remove more copies than you own, vanilla-face!";
         $copy = $book->getCopies();
         $author = $book->getAuthors();
         $copies = $book->countCopies($copy);
-        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies));
+        return $app['twig']->render('book.html.twig', array('book' => $book, 'author' => $author[0], 'copies' => $copies, 'error' => $not_valid));
     });
 
     return $app;

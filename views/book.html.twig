@@ -19,6 +19,10 @@
                     <button type="submit" class="btn btn-success">Submit Edit</button>
                 </form>
 
+
+                    <h4>{{ error }}</h4>
+
+
                 <form action="/book/{{ book.getId }}/edit_copies" method="post">
                     <input type="hidden" name="_method" value="patch">
 
